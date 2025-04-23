@@ -9,7 +9,127 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      attendance: {
+        Row: {
+          batch_id: string
+          id: string
+          student_id: string
+          timestamp: string | null
+        }
+        Insert: {
+          batch_id: string
+          id?: string
+          student_id: string
+          timestamp?: string | null
+        }
+        Update: {
+          batch_id?: string
+          id?: string
+          student_id?: string
+          timestamp?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attendance_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      batches: {
+        Row: {
+          created_at: string | null
+          id: string
+          name: string
+          time_slot: string
+          type: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          name: string
+          time_slot: string
+          type: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          name?: string
+          time_slot?: string
+          type?: string
+        }
+        Relationships: []
+      }
+      students: {
+        Row: {
+          batch_id: string
+          contact: string
+          created_at: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          batch_id: string
+          contact: string
+          created_at?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          batch_id?: string
+          contact?: string
+          created_at?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "students_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "batches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      topics: {
+        Row: {
+          batch_id: string
+          date: string
+          id: string
+          topic: string
+        }
+        Insert: {
+          batch_id: string
+          date: string
+          id?: string
+          topic: string
+        }
+        Update: {
+          batch_id?: string
+          date?: string
+          id?: string
+          topic?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "topics_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "batches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
