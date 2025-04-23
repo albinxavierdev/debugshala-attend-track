@@ -1,11 +1,4 @@
-
-import { createClient } from '@supabase/supabase-js';
-
-// These values will be replaced once the user connects Supabase through Lovable's integration
-const supabaseUrl = 'https://your-supabase-url.supabase.co';
-const supabaseAnonKey = 'your-supabase-anon-key';
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+import { supabase } from '@/integrations/supabase/client';
 
 export type Batch = {
   id?: string;
